@@ -25,11 +25,14 @@ void _simple_write(int fd, const char *str, int len)
 void handle_specifiers(int fd, char specifier,
 		va_list args, int *written_chars)
 {
-	char buffer[BUFFER_SIZE], c, *str;
-	char invalid_specifier[3] = {'%', specifier, '\0'};
+	char c, *str;
+	char invalid_specifier[3];
 	/* Buffer to store the formatted string */
-	int buffer_index = 0, num;
+	int num;
 
+	invalid_specifier[0] = '%';
+	invalid_specifier[1] = specifier;
+	invalid_specifier[2] = '\0';
 	switch (specifier)
 	{
 	case 'c':
@@ -68,13 +71,12 @@ void handle_specifiers(int fd, char specifier,
 
 int _printf(const char *format, ...)
 {
+	va_list args;
+	int written_chars = 0;
 	/*check if format is NULL*/
 	if (format == NULL)
 		return (-1);
-	va_list args;
-
 	va_start(args, format);
-	int written_chars = 0;
 
 	while (*format != '\0')
 	{
