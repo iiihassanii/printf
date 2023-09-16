@@ -47,7 +47,7 @@ void print_percent(int fd, int *written_chars)
 void print_number(int fd, int num, int *written_chars)
 {
 	char buffer[BUFFER_SIZE];
-	int buffer_index = 0;
+	unsigned int buffer_index = 0;
 	int num_copy = num;
 	int num_digits = 0;
 
