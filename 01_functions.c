@@ -107,4 +107,3 @@ void print_percent(int fd, int *written_chars) { _simple_write(fd, "%", 1);
         num_copy /= 10;} while (num_copy != 0);
  while (buffer_index > 0) { _simple_write(fd, &buffer[--buffer_index], 1);
         *written_chars += 1; }}
->>>>>>> cd97f3782afd712d1d405954637568ea515bbf9b
