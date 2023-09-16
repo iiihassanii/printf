@@ -63,7 +63,7 @@ void print_number(int fd, int num, int *written_chars)
 		num_digits++;
 		num_copy /= 10;
 	} while (num_copy != 0);
-
+	buffer[buffer_index++] = '-';
 	while (buffer_index > 0)
 	{
 		_simple_write(fd, &buffer[--buffer_index], 1);
