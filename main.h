@@ -8,6 +8,7 @@
 #define BUFFER_SIZE 1024
 
 /*functions*/
+void print_int(int fd, int num, int *written_chars);
 void _simple_write(int fd, const char *str, int len);
 void print_string(int fd, const char *str, int *written_chars);
 void print_percent(int fd, int *written_chars);

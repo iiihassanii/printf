@@ -54,7 +54,7 @@ void handle_specifiers(int fd, char specifier,
 		break;
 	case 'i':
 		num = va_arg(args, int);
-		print_number(fd, num, written_chars);
+		print_int(fd, num, written_chars);
 		break;
 	default:
 		_simple_write(fd, invalid_specifier, 2);

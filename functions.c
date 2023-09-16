@@ -70,3 +70,15 @@ void print_number(int fd, int num, int *written_chars)
 		*written_chars += 1;
 	}
 }
+
+/**
+ * print_int - handle string print
+ * @fd: file descriptor
+ * @num: number we wanna print
+ * @written_chars: return value
+ * Return: VOID
+ */
+void print_int(int fd, int num, int *written_chars)
+{
+	print_number(fd, num, written_chars);
+}
