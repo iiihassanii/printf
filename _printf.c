@@ -29,7 +29,7 @@ void handle_specifiers(int fd, char specifier,
 	char invalid_specifier[3];
 	/* Buffer to store the formatted string */
 	int num;
-
+	/*hey */
 	invalid_specifier[0] = '%';
 	invalid_specifier[1] = specifier;
 	invalid_specifier[2] = '\0';
@@ -62,7 +62,6 @@ void handle_specifiers(int fd, char specifier,
 		break;
 	}
 }
-
 /**
  * _printf - similler printf function
  * @format: specifies the necessary operations
