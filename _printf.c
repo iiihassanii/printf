@@ -25,40 +25,35 @@ void _simple_write(int fd, const char *str, int len)
 void handle_specifiers(int fd, char specifier,
 		va_list args, int *written_chars)
 {
-	char buffer[BUFFER_SIZE];
+	char buffer[BUFFER_SIZE], c, *str;
+	char invalid_specifier[3] = {'%', specifier, '\0'};
 	/* Buffer to store the formatted string */
-	int buffer_index = 0;
+	int buffer_index = 0, num;
 
 	switch (specifier)
 	{
 	case 'c':
-		char c = (char)va_arg(args, int);
-
+		c = (char)va_arg(args, int);
 		_simple_write(fd, &c, 1); /*print only 1 char */
 		*written_chars += 1;
 		break;
 	case 's':
-		char *str = va_arg(args, char *);
-
+		str = va_arg(args, char *);
 		print_string(fd, str, written_chars);
 		break;
 	case '%':
 		print_percent(fd, written_chars);
 		break;
 	case 'd':
-		int num = va_arg(args, int);
+		num = va_arg(args, int);
 
 		print_number(fd, num, written_chars);
 		break;
 	case 'i':
-		int num = va_arg(args, int);
-
+		num = va_arg(args, int);
 		print_number(fd, num, written_chars);
 		break;
 	default:
-		/* Invalid format specifier, ignore and continue */
-		char invalid_specifier[3] = {'%', specifier, '\0'};
-
 		_simple_write(fd, invalid_specifier, 2);
 		*written_chars += 2;
 		break;
