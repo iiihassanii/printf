@@ -63,36 +63,35 @@ void handle_specifiers(int fd, char specifier,
 	}
 }
 /**
- * _printf - similler printf function
- * @format: specifies the necessary operations
+ * handle_specifiers_2 - handle specifier charctar
+ * @fd: file descriptor
+ * @specifier: specifier charctar
+ * @args: location of the char
+ * @written_chars: return value
  * Return: written charctars
  */
 
-int _printf(const char *format, ...)
+
+void handle_specifiers_2(int fd, char specifier, va_list args, int *written_chars)
 {
-	va_list args;
-	int written_chars = 0;
-	/*check if format is NULL*/
-	if (format == NULL)
-		return (-1);
-	va_start(args, format);
-
-	while (*format != '\0')
+	char c, *str;
+	char invalid_specifier[3];
+	/* Buffer to store the formatted string */
+	int num;
+	/*hey */
+	invalid_specifier[0] = '%';
+	invalid_specifier[1] = specifier;
+	invalid_specifier[2] = '\0';
+    switch (specifier)
 	{
-	if (*format == '%')
-	{
-	format++;
-
-	/* Handle format specifiers*/
-	handle_specifiers(1, *format, args, &written_chars);
+	case 'r':
+		str = va_arg(args, char *);
+		print_string_re(fd, str, written_chars);
+	break;
+	default:
+		char invalid_specifier[3] = {'%', specifier, '\0'};
+		_simple_write(fd, invalid_specifier, 2);
+		*written_chars += 2;
+	break;
 	}
-	else
-	{
-	_simple_write(1, format, 1);
-	written_chars++;
-	}
-	format++;
-	}
-	va_end(args);
-	return (written_chars);
 }
