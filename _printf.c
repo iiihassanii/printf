@@ -95,3 +95,36 @@ void handle_specifiers_2(int fd, char specifier, va_list args, int *written_char
 	break;
 	}
 }
+/**
+ * _printf - similler printf function
+ * @format: specifies the necessary operations
+ * Return: written charctars
+ */
+int _printf(const char *format, ...)
+{
+	/*check if format is NULL*/
+	va_list args;
+	int written_chars = 0;
+	if (format == NULL)
+		return (-1);
+	va_start(args, format);
+	while (*format != '\0')
+	{
+	if (*format == '%')
+	{
+		format++;
+	if (*format == 's' || *format == 'd' || *format == 'i' || *format == 'c' || *format == '%')
+		handle_specifiers(1, *format, args, &written_chars);
+	else
+		handle_specifiers_2(1, *format, args, &written_chars);
+	} else
+	{
+	_simple_write(1, format, 1);
+		written_chars++;
+	}
+	format++;
+	}
+	va_end(args);
+	return written_chars;
+}
+
