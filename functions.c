@@ -32,15 +32,16 @@ void print_string(int fd, const char *str, int *written_chars)
 
 void print_string_re(int fd, const char *str, int *written_chars)
 {
-    char buffer[BUFFER_SIZE];
-	unsigned int buffer_index = 0, i = 0;
+	char buffer[BUFFER_SIZE];
+	unsigned int buffer_index = 0;
 	const char *c = str;
+
 	while (*c != '\0')
 	{
-	    buffer[buffer_index++] = *c;
-	c++;
-    }
-    while (buffer_index > 0)
+		buffer[buffer_index++] = *c;
+		c++;
+	}
+	while (buffer_index > 0)
 	{
 		_simple_write(fd, &buffer[--buffer_index], 1);
 		*written_chars += 1;
