@@ -78,7 +78,6 @@ void handle_specifiers_2(int fd, char specifier,
 {
 	char *str;
 	char invalid_specifier[3];
-	
 	invalid_specifier[0] = '%';
 	invalid_specifier[1] = specifier;
 	invalid_specifier[2] = '\0';
@@ -123,7 +122,8 @@ int _printf(const char *format, ...)
 	}
 	format++;
 	}
-
+	/*hey*/
+	/*haaa*/
 	va_end(args);
 	return (written_chars);
 }
