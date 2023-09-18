@@ -122,6 +122,7 @@ int _printf(const char *format, ...)
 	}
 	format++;
 	}
+	/*hhhh*/
 	va_end(args);
 	return (written_chars);
 }
