@@ -75,6 +75,7 @@ void handle_specifiers_2(int fd, char specifier,
 {
 	char *str;
 	char invalid_specifier[3];
+	void* ptr;
 
 	invalid_specifier[0] = '%';
 	invalid_specifier[1] = specifier;
@@ -86,11 +87,30 @@ void handle_specifiers_2(int fd, char specifier,
 			str = va_arg(args, char *);
 			print_string_re(fd, str, written_chars);
 			break;
+		case 'p':
+			ptr = va_arg(args, void*);
+			print_pointer(fd, ptr, written_chars);
+			break;
 		default:
 			_simple_write(fd, invalid_specifier, 2);
 			*written_chars += 2;
 		break;
 	}
+}
+
+/**
+ * print_pointer - pointer print
+ * @fd: file descriptor
+ * @ptr: pointer
+ * @written_chars: return value\
+ */
+
+void print_pointer(int fd, void* ptr, int *written_chars)
+{
+	char buffer[20];
+	sprintf(buffer, "%p", ptr);
+	_simple_write(fd, buffer, strlen(buffer));
+	*written_chars += strlen(buffer);
 }
 
 int _printf(const char *format, ...)
@@ -109,7 +129,7 @@ int _printf(const char *format, ...)
 	{
 		format++;
 		/*Handle format specifiers*/
-		if (*format == 'r')
+		if (*format == 'r' || *format == 'p')
 			handle_specifiers_2(1, *format, args, &written_chars);
 		else
 			handle_specifiers(1, *format, args, &written_chars);

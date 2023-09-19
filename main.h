@@ -6,10 +6,12 @@
 #include <stdarg.h>
 #include <limits.h>
 #include <string.h>
+
 #define BUFFER_SIZE 1024
 
 
 /*functions*/
+void print_pointer(int fd, void* ptr, int *written_chars);
 void _simple_write(int fd, const char *str, int len);
 void print_string_re(int fd, const char *str, int *written_chars);
 void handle_specifiers_2(int fd, char specifier,
