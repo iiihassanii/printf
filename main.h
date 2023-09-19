@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
-
+#include <limits.h>
+#include <string.h>
 #define BUFFER_SIZE 1024
+
 
 /*functions*/
 void _simple_write(int fd, const char *str, int len);

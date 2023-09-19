@@ -60,6 +60,19 @@ void print_percent(int fd, int *written_chars)
 	*written_chars += 1;
 }
 
+
+/**
+ * *print_int - dwdwd
+ * @n: wadadwadd
+ * Return: str
+ */
+char *print_int(int n)
+{
+	static char buffer[BUFFER_SIZE];
+
+	sprintf(buffer, "%d", n);
+	return (buffer);
+}
 /**
  * print_number - handle string print
  * @fd: file descriptor
@@ -70,27 +83,15 @@ void print_percent(int fd, int *written_chars)
 
 void print_number(int fd, int num, int *written_chars)
 {
-	char buffer[BUFFER_SIZE];
-	unsigned int buffer_index = 0;
-	int num_copy = num;
-	int num_digits = 0;
+	char *str = print_int(num);
+	char *c = str;
+	int len = 0;
 
-	if (num < 0)
+	while (*c != '\0')
 	{
-		num_digits++;
-		num_copy = -num_copy;
+		len++;
+		c++;
 	}
-
-	do {
-		buffer[buffer_index++] = '0' + (num_copy % 10);
-		num_digits++;
-		num_copy /= 10;
-	} while (num_copy != 0);
-	if (num < 0)
-		buffer[buffer_index++] = '-';
-	while (buffer_index > 0)
-	{
-		_simple_write(fd, &buffer[--buffer_index], 1);
-		*written_chars += 1;
-	}
+	_simple_write(fd, str, len);
+	*written_chars += len;
 }

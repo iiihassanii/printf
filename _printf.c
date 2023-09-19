@@ -27,9 +27,8 @@ void handle_specifiers(int fd, char specifier,
 {
 	char c, *str;
 	char invalid_specifier[3];
-	/* Buffer to store the formatted string */
 	int num;
-	/*hey */
+
 	invalid_specifier[0] = '%';
 	invalid_specifier[1] = specifier;
 	invalid_specifier[2] = '\0';
@@ -42,16 +41,14 @@ void handle_specifiers(int fd, char specifier,
 		break;
 	case 's':
 		str = va_arg(args, char *);
+		if (str == NULL)
+			str = "(null)";
 		print_string(fd, str, written_chars);
 		break;
 	case '%':
 		print_percent(fd, written_chars);
 		break;
 	case 'd':
-		num = va_arg(args, int);
-
-		print_number(fd, num, written_chars);
-		break;
 	case 'i':
 		num = va_arg(args, int);
 		print_number(fd, num, written_chars);
@@ -78,6 +75,7 @@ void handle_specifiers_2(int fd, char specifier,
 {
 	char *str;
 	char invalid_specifier[3];
+
 	invalid_specifier[0] = '%';
 	invalid_specifier[1] = specifier;
 	invalid_specifier[2] = '\0';
